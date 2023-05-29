@@ -1,0 +1,18 @@
+xhj:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    host: localhost
+    port: 3306
+    database: xhj_order
+    username: root
+    password: 123456
+  wechat:
+    appid: wx6a576a71df3a848c
+    secret: bae4982818a0a9404163baa584205381
+
+  alioss:
+    endpoint: oss-cn-guangzhou.aliyuncs.com
+    access-key-id: LTAI5tKWXD3dj1AdWdrBR588
+    access-key-secret: l3nnfD4WjfDJuGy5hn7GUUeTNUa7JD
+    bucket-name: gulimall-xhj
+

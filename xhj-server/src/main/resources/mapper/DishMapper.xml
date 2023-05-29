@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xhj.mapper.DishMapper">
+
+    <select id="page" resultType="com.xhj.vo.DishVO">
+        select d.*,c.name as CategoryName from dish d join
+            category c on d.category_id=c.id
+    <where>
+        <if test="name!=null">
+            and name like concat('%',#{name},'%')
+        </if>
+        <if test="categoryId !=null">
+            and category_id  like concat('%',#{categoryId},'%')
+        </if>
+        <if test="status!=null">
+            and status like concat('%',#{status},'%')
+        </if>
+    </where>
+    </select>
+
+    <select id="list" resultType="Dish" parameterType="Dish">
+        select * from dish
+        <where>
+            <if test="name != null">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+        order by update_time desc
+    </select>
+    <delete id="deleteById">
+        delete from dish where id = #{id}
+    </delete>
+
+    <update id="updateDish">
+        update dish
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="categoryId!=null">category_id=#{categoryId},</if>
+            <if test="price!=null">price=#{price},</if>
+            <if test="image!=null">image=#{image},</if>
+            <if test="description!=null">description=#{description},</if>
+            <if test="status!=null">status=#{status},</if>
+            <!--  <if test="createTime!=null">create_time=#{createTime},</if>
+              <if test="updateTime!=null">update_time=#{updateTime},</if>
+              <if test="createUser!=null">create_user=#{createUser},</if>
+              <if test="updateUser!=null">update_user=#{updateUser},</if>-->
+            <if test="updateTime!=null">update_time=#{updateTime},</if>
+            <if test="updateUser!=null">update_user=#{updateUser},</if>
+        </set>
+        where id=#{id}
+    </update>
+    <select id="countByMap" resultType="java.lang.Integer">
+        select count(id) from dish
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+        </where>
+    </select>
+</mapper>

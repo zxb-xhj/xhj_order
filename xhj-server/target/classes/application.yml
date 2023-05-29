@@ -1,0 +1,59 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    druid:
+      driver-class-name: ${xhj.datasource.driver-class-name}
+      url: jdbc:mysql://${xhj.datasource.host}:${xhj.datasource.port}/${xhj.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${xhj.datasource.username}
+      password: ${xhj.datasource.password}
+  #设置环境
+  redis:
+    host: 47.120.6.55
+    port: 6379
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.xhj.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      xhj:
+        mapper: debug
+        service: info
+        controller: info
+
+xhj:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret-key: itcast
+    # 设置jwt过期时间
+    admin-ttl: 7200000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: token
+    user-secret-key: itheima
+    user-ttl: 7200000
+    user-token-name: authentication
+
+  alioss:
+    endpoint: ${xhj.alioss.endpoint}
+    access-key-id: ${xhj.alioss.access-key-id}
+    access-key-secret: ${xhj.alioss.access-key-secret}
+    bucket-name: ${xhj.alioss.bucket-name}
+  wechat:
+    appid: ${xhj.wechat.appid}
+    secret: ${xhj.wechat.secret}
+  shop:
+    address: 长沙市中南林业科技大学涉外学院
+  baidu:
+    ak: vBiXAL1fyR1ZzqLqPlDWpCfG2KVPgZG6
